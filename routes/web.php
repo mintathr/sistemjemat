@@ -6,8 +6,12 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
+}); */
+
+Route::get('/', function () {
+    return redirect()->route('login');
 });
     
 
