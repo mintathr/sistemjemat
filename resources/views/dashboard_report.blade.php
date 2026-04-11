@@ -133,7 +133,7 @@
                         @forelse($ultah_jemaat as $ultah)
                         <tr>
                             <td>
-                                {{ $ultah->nama_lengkap }}<br>
+                                {{ $ultah->nama_pertama }} {{ $ultah->nama_belakang }}<br>
                                 <span class="text-muted">{{ $ultah->kategori }} - Sektor {{ $ultah->family->sektor ?? '-' }}</span>
                             </td>
                             <td class="text-right highlight-date">
@@ -153,18 +153,25 @@
                     <thead>
                         <tr>
                             <th style="width: 70%;">Keluarga</th>
-                            <th style="text-right">Tanggal</th>
+                            <th style="text-right">Tanggal Menikah</th>
+                            <th style="text-right">Usia Pernikahan</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($ultah_nikah as $nikah)
-                        <tr>
-                            <td>
-                                Kel. {{ $nikah->nama_keluarga }}<br>
-                                <span class="text-muted">Sektor {{ $nikah->sektor }}</span>
+                        <tr class="hover:bg-rose-50 transition">
+                            <td class="px-6 py-4 font-medium text-gray-800">
+                                {{ $nikah->nama_pertama }} {{ $nikah->nama_belakang }} 
+                                <span class="text-xs text-gray-400 block">Keluarga: {{ $nikah->family->nama_keluarga ?? '-' }}</span>
                             </td>
-                            <td class="text-right highlight-date">
-                                {{ \Carbon\Carbon::parse($nikah->tgl_nikah)->format('d M') }}
+                            <td class="px-6 py-4 text-sm text-center">
+                                <span class="badge bg-white border border-rose-300 text-rose-700 px-2 py-1 rounded font-bold">
+                                    {{ $nikah->tgl_nikah_gereja->format('d M') }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600 text-center">
+                                {{-- Hitung selisih tahun nikah sampai tahun ini --}}
+                                Ke-{{ now()->year - $nikah->tgl_nikah_gereja->year }}
                             </td>
                         </tr>
                         @empty
