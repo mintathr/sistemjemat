@@ -91,8 +91,8 @@ class MemberController extends Controller
     public function update(Request $request, Member $member)
     {
         $validated = $request->validate([
-            'nama_pertama' => 'required|string',
-            'nama_belakang' => 'nullable|string',
+            #'nama_pertama' => 'required|string',
+            #'nama_belakang' => 'nullable|string',
             'jenis_kelamin' => 'required|in:L,P',
             'hubungan_keluarga' => 'nullable|in:KK,IS,AN,OT,CU,KA,MN,FA',
             'tempat_lahir' => 'nullable|exists:provinces,code',
@@ -110,7 +110,7 @@ class MemberController extends Controller
             'pendidikan_terakhir' => 'nullable|string',
             'gelar' => 'nullable|string',
             'jurusan' => 'nullable|string',
-            'pekerjaan' => 'nullable|in:Belum Bekerja,Pegawai Negeri Sipil (PNS),Karyawan Swasta,Karyawan BUMN,TNI/POLRI,Wiraswasta,Pensiunan,Ibu Rumah Tangga',
+            'pekerjaan' => 'nullable|string',
             'tempat_kerja' => 'nullable|string',
             'pengalaman_organisasi' => 'nullable|string',
             'pengalaman_gerejawi' => 'nullable|string',
@@ -120,7 +120,7 @@ class MemberController extends Controller
             'hp' => 'nullable|string',
             'email' => 'nullable|email',
             'posisi_jabatan' => 'nullable|string',
-            'pengurus_pelkat' => 'nullable|in:PA,PT,GP,PKB,PKP,PKLU',
+            'pengurus_pelkat' => 'nullable|in:PELKAT-PA,PELKAT-PT,PELKAT-GP,PELKAT-PKB,PELKAT-PKP,PELKAT-PKLU',
             'profesi' => 'nullable|string',
             'riwayat_lain' => 'nullable|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
