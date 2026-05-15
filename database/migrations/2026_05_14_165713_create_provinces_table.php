@@ -13,19 +13,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('provinces', function (Blueprint $table) {
-            $table->id();
-            $table->string('code')->unique();
+            $table->char('id', 2)->index();
             $table->string('name');
-            $table->timestamps();
         });
-
-        DB::table('provinces')->insert([
-            ['code' => 'ID-JK', 'name' => 'DKI Jakarta', 'created_at' => now(), 'updated_at' => now()],
-            ['code' => 'ID-JB', 'name' => 'Jawa Barat', 'created_at' => now(), 'updated_at' => now()],
-            ['code' => 'ID-JT', 'name' => 'Jawa Tengah', 'created_at' => now(), 'updated_at' => now()],
-            ['code' => 'ID-JI', 'name' => 'Jawa Timur', 'created_at' => now(), 'updated_at' => now()],
-            ['code' => 'ID-BT', 'name' => 'Banten', 'created_at' => now(), 'updated_at' => now()],
-        ]);
     }
 
     /**

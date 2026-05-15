@@ -55,14 +55,9 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="tempat_lahir" class="block text-sm font-medium text-gray-700">Tempat Lahir (Provinsi)</label>
-                        <select name="tempat_lahir" id="tempat_lahir" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base">
-                            <option value="">-- Pilih Provinsi --</option>
-                            @foreach($provinces as $province)
-                                <option value="{{ $province->code }}" {{ old('tempat_lahir', $member->tempat_lahir) == $province->code ? 'selected' : '' }}>{{ $province->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('tempat_lahir') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+                        <label for="tempat_lahir" class="block text-sm font-medium text-gray-700">Tempat Lahir</label>
+                        <input type="text" name="tempat_lahir" id="tempat_lahir" value="{{ old('tempat_lahir', $member->tempat_lahir) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        @error('tempat_lahir') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror                        
                     </div>
 
                     <div class="mb-4">

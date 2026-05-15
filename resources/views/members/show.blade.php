@@ -42,9 +42,8 @@
                 </div>
             @endif
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-2">
-                
-                <div class="lg:col-span-3 space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">                
+                <div class="lg:col-span-4 xl:col-span-3 space-y-6">
                     <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
                         <div class="h-32 {{ $member->status_pindah_meninggal == 'Meninggal' ? 'bg-gray-700' : 'bg-gradient-to-r from-blue-600 to-indigo-700' }}"></div>
                         
@@ -80,7 +79,7 @@
                                 </span>
                             </div>
 
-                        <div class="mt-8 grid grid-cols-2 gap-2 border-t pt-6">
+                            <div class="mt-8 grid grid-cols-2 gap-0 border-t pt-6">
                                 <div class="text-center">
                                     <p class="text-xs text-gray-400 uppercase font-bold">Gol. Darah</p>
                                     <p class="text-lg font-black text-red-600">{{ $member->golongan_darah ?? '-' }}</p>
@@ -112,29 +111,29 @@
                     </div>
                 </div>
 
-                <div class="lg:col-span-9 space-y-6">
+                <div class="lg:col-span-8 xl:col-span-9 space-y-6">
                     
                     <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
                         <h3 class="text-lg font-black text-gray-800 mb-6 flex items-center">
                             <span class="w-2 h-8 bg-blue-600 rounded-full mr-3"></span>
                             Timeline Spiritual
                         </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-                            <div class="relative p-5 rounded-2xl border-2 {{ $member->status_baptis == 'S' ? 'border-blue-100 bg-blue-50/50' : 'border-gray-100 bg-gray-50' }}">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="relative p-6 rounded-2xl border-2 {{ $member->status_baptis == 'S' ? 'border-blue-100 bg-blue-50/50' : 'border-gray-100 bg-gray-50' }}">
                                 <div class="text-xs font-black text-blue-400 uppercase mb-2">Baptis</div>
                                 <p class="text-lg font-black {{ $member->status_baptis == 'S' ? 'text-blue-900' : 'text-gray-300' }}">
                                     {{ $member->status_baptis == 'S' ? 'Sudah' : 'Belum' }}
                                 </p>
                                 <p class="text-xs text-gray-500 mt-1">{{ $member->tanggal_baptis ? $member->tanggal_baptis->format('d/m/Y') : '-' }}</p>
                             </div>
-                            <div class="relative p-5 rounded-2xl border-2 {{ $member->status_sidi == 'S' ? 'border-purple-100 bg-purple-50/50' : 'border-gray-100 bg-gray-50' }}">
+                            <div class="relative p-6 rounded-2xl border-2 {{ $member->status_sidi == 'S' ? 'border-purple-100 bg-purple-50/50' : 'border-gray-100 bg-gray-50' }}">
                                 <div class="text-xs font-black text-purple-400 uppercase mb-2">Sidi</div>
                                 <p class="text-lg font-black {{ $member->status_sidi == 'S' ? 'text-purple-900' : 'text-gray-300' }}">
                                     {{ $member->status_sidi == 'S' ? 'Sudah' : 'Belum' }}
                                 </p>
                                 <p class="text-xs text-gray-500 mt-1">{{ $member->tanggal_sidi ? $member->tanggal_sidi->format('d/m/Y') : '-' }}</p>
                             </div>
-                            <div class="relative p-5 rounded-2xl border-2 border-gray-100 bg-gray-50">
+                            <div class="relative p-6 rounded-2xl border-2 border-gray-100 bg-gray-50">
                                 <div class="text-xs font-black text-pink-400 uppercase mb-2">Nikah</div>
                                 <p class="text-lg font-black text-gray-700">
                                     {{ $member->status_nikah ?? '-' }}
@@ -144,7 +143,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+                        <div class="bg-white rounded-[2rem] shadow-xl p-8 border border-gray-100">
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="text-lg font-black text-gray-800 flex items-center">
                                 <span class="w-2 h-8 bg-indigo-600 rounded-full mr-3"></span>
@@ -157,7 +156,7 @@
                             <div class="group">
                                 <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Tempat, Tanggal Lahir</p>
                                 <p class="text-gray-700 font-semibold group-hover:text-blue-600 transition">
-                                    {{ $member->province->name ?? $member->tempat_lahir ?? '-' }}, {{ $member->tanggal_lahir ? $member->tanggal_lahir->format('d F Y') : '-' }}
+                                    {{ $member->tempat_lahir ?? '-' }}, {{ $member->tanggal_lahir ? $member->tanggal_lahir->format('d F Y') : '-' }}
                                 </p>
                             </div>
                             <div class="group">
@@ -178,7 +177,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-10 p-6 bg-gray-50 rounded-3xl border border-dashed border-gray-300">
+                        <div class="mt-10 p-2 bg-gray-50 rounded-3xl border border-dashed border-gray-300">
                             <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Alamat Tinggal</p>
                             <p class="text-gray-600 italic">
                                 {{ $member->family->alamat ?? 'Alamat belum diisi di data keluarga.' }}

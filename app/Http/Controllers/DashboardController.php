@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Family;
 use App\Models\Member;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -14,28 +15,34 @@ class DashboardController extends Controller
         $allMembers = Member::where('status_aktif', 'Aktif')->get();
 
         // --- LOGIKA ULANG TAHUN MINGGU INI ---
-        $startOfWeek = now()->startOfWeek(); // Senin pukul 00:00
+        #$startOfWeek = now()->startOfWeek(); // Senin pukul 00:00
         $endOfWeek = now()->endOfWeek();     // Minggu pukul 23:59
 
-        $ultahMingguIni = $allMembers->filter(function($member) use ($startOfWeek, $endOfWeek) {
+        // Asumsi $startOfWeek adalah hari Minggu pekan ini
+        $startOfWeek = now()->startOfWeek(Carbon::SUNDAY); 
+
+        // Tambahkan 13 hari dari hari Minggu tersebut untuk mendapatkan hari Sabtu di pekan depannya
+        $endOfNextWeek = $startOfWeek->copy()->addDays(13);
+
+        $ultahMingguIni = $allMembers->filter(function($member) use ($startOfWeek, $endOfNextWeek) {
             if (!$member->tanggal_lahir) return false;
 
             // Set tahun lahir jemaat ke tahun sekarang untuk perbandingan range
             $tanggalUltahTahunIni = $member->tanggal_lahir->copy()->year(now()->year);
 
-            return $tanggalUltahTahunIni->between($startOfWeek, $endOfWeek);
+            return $tanggalUltahTahunIni->between($startOfWeek, $endOfNextWeek);
         })->sortBy(function($member) {
                 // Urutkan berdasarkan tanggal terdekat
                 return $member->tanggal_lahir->format('m-d');
         });
 
         // Logika Wedding Anniversary
-        $hwaNikah = $allMembers->filter(function($member) use ($startOfWeek, $endOfWeek) {
+        $hwaNikah = $allMembers->filter(function($member) use ($startOfWeek, $endOfNextWeek) {
             if (!$member->tgl_nikah_gereja) return false;
             
             // Set tahun nikah ke tahun ini untuk pengecekan range
             $anniversaryTahunIni = $member->tgl_nikah_gereja->copy()->year(now()->year);
-            return $anniversaryTahunIni->between($startOfWeek, $endOfWeek);
+            return $anniversaryTahunIni->between($startOfWeek, $endOfNextWeek);
         })->sortBy(function($member) {
             return $member->tgl_nikah_gereja->format('m-d');
         });
@@ -109,7 +116,7 @@ class DashboardController extends Controller
             
             'ultah_jemaat'          => $ultahMingguIni,
             'ultah_nikah'           => $hwaNikah,
-            'rentang_tgl'           => $startOfWeek->format('d M') . ' - ' . $endOfWeek->format('d M Y'),
+            'rentang_tgl'           => $startOfWeek->format('d M') . ' - ' . $endOfNextWeek->format('d M Y'),
             'demografi_kodepos'     => $demografiKodepos,
             'total_jemaat_aktif'    => $allMembers->count(), // Untuk hitung persentase
             'demografi_goldar'      => $demografi_goldar,

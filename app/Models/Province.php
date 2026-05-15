@@ -10,7 +10,7 @@ class Province extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code',
+        'id',
         'name',
     ];
 }

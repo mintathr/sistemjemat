@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use App\Models\Province;
+use App\Models\Regency;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -80,9 +81,9 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        $provinces = Province::orderBy('name')->get();
+        $regencies = Regency::orderBy('name')->get();
 
-        return view('members.edit', compact('member', 'provinces'));
+        return view('members.edit', compact('member', 'regencies'));
     }
 
     /**
@@ -95,7 +96,7 @@ class MemberController extends Controller
             #'nama_belakang' => 'nullable|string',
             'jenis_kelamin' => 'required|in:L,P',
             'hubungan_keluarga' => 'nullable|in:KK,IS,AN,OT,CU,KA,MN,FA',
-            'tempat_lahir' => 'nullable|exists:provinces,code',
+            'tempat_lahir' => 'nullable|string',
             'tanggal_lahir' => 'nullable|date',
             'status_baptis' => 'nullable|in:S,B',
             'tempat_baptis' => 'nullable|string',
