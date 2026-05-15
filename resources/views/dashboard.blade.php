@@ -14,7 +14,7 @@
                     <span class="font-bold text-sm">Download Laporan Jemaat</span>
                 </a>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 mb-8">
                 <div class="bg-white shadow-sm rounded-lg border-l-4 border-purple-500 p-6">
                     <div class="flex items-center">
                         <div class="p-3 bg-purple-100 rounded-full">
@@ -64,13 +64,13 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
                 <div class="bg-white p-6 rounded-lg shadow-sm">
                     <h3 class="text-lg font-bold text-gray-700 mb-4 border-b pb-2 flex items-center">
                         <i class="bi bi-geo-alt-fill text-red-500 mr-2"></i> SEKTOR JEMAAT
                     </h3>
                     
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-2">
                         <div class="bg-blue-50 p-4 rounded-lg border-b-4 border-blue-400 text-center transition hover:shadow-md">
                             <p class="text-xs text-blue-600 font-bold uppercase tracking-wider mb-1">Sektor 1</p>
                             <div class="flex items-center justify-center space-x-2">

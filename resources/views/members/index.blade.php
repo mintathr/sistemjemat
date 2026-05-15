@@ -8,6 +8,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm sm:rounded-lg p-6">
                 
+                @if(session('success'))
+                    <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline">{{ session('success') }}</span>
+                    </div>
+                @endif
+                
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-lg font-bold text-gray-700">Daftar Jemaat</h3>
                     <!-- <a href="{{ route('members.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-semibold transition">
@@ -38,8 +44,8 @@
                                 <td class="px-4 py-3 text-xs text-gray-500 italic">
                                     {{ $member->family->nama_keluarga ?? 'N/A' }}
                                 </td>
-                                <td class="px-4 py-3 text-center">{{ $member->tanggal_lahir->format('Y-m-d') }}</td>
-                                <td class="px-4 py-3 text-center">{{ $member->tanggal_lahir->age }}</td>
+                                <td class="px-4 py-3 text-center">{{ $member->tanggal_lahir ? $member->tanggal_lahir->format('Y-m-d') : '-' }}</td>
+                                <td class="px-4 py-3 text-center">{{ $member->tanggal_lahir ? $member->tanggal_lahir->age : '-' }}</td>
                                 <td class="px-4 py-3 text-center">{{ $member->hp }}</td>
                                 <td class="px-4 py-3 text-center">{{ $member->kategori }}</td>
                                 <td class="px-4 py-3 text-center">
@@ -48,10 +54,9 @@
                                 </span>
                                 </td>
                                 <td class="px-4 py-3 text-center text-xs font-medium">
-                                    <div class="flex justify-center space-x-1">
-                                        <a href="{{ route('members.show', $member->id) }}" class="text-blue-500 hover:underline">Detail</a>
-                                        <span class="text-gray-300">|</span>
-                                        <a href="{{ route('members.edit', $member->id) }}" class="text-yellow-600 hover:underline">Edit</a>
+                                    <div class="flex justify-center space-x-2">
+                                        <a href="{{ route('members.show', $member->id) }}" class="text-blue-500 hover:text-blue-700 px-2 py-1 border border-blue-500 rounded text-xs">Detail</a>
+                                        <a href="{{ route('members.edit', $member->id) }}" class="text-orange-500 hover:text-orange-700 px-2 py-1 border border-orange-500 rounded text-xs">Edit</a>
                                     </div>
                                 </td>
                             </tr>

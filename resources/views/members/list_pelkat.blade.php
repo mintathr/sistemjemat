@@ -22,7 +22,7 @@
                 $urutan = ['PELKAT-PA', 'PELKAT-PT', 'PELKAT-GP', 'PELKAT-PKP', 'PELKAT-PKB', 'PELKAT-PKLU'];
             @endphp
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                 @foreach($urutan as $p)
                     @php 
                         $group = $pelkatGroups->get($p);

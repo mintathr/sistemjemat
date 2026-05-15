@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
+use App\Models\Province;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -77,17 +78,66 @@ class MemberController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Member $member)
     {
-        //
+        $provinces = Province::orderBy('name')->get();
+
+        return view('members.edit', compact('member', 'provinces'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Member $member)
     {
-        //
+        $validated = $request->validate([
+            'nama_pertama' => 'required|string',
+            'nama_belakang' => 'nullable|string',
+            'jenis_kelamin' => 'required|in:L,P',
+            'hubungan_keluarga' => 'nullable|in:KK,IS,AN,OT,CU,KA,MN,FA',
+            'tempat_lahir' => 'nullable|exists:provinces,code',
+            'tanggal_lahir' => 'nullable|date',
+            'status_baptis' => 'nullable|in:S,B',
+            'tempat_baptis' => 'nullable|string',
+            'tanggal_baptis' => 'nullable|date',
+            'status_sidi' => 'nullable|in:S,B',
+            'tempat_sidi' => 'nullable|string',
+            'tanggal_sidi' => 'nullable|date',
+            'status_nikah' => 'nullable|in:Belum Kawin,Kawin,Cerai Hidup,Cerai Mati',
+            'tgl_nikah_gereja' => 'nullable|date',
+            'tgl_nikah_sipil' => 'nullable|date',
+            'golongan_darah' => 'nullable|in:A,B,AB,O',
+            'pendidikan_terakhir' => 'nullable|string',
+            'gelar' => 'nullable|string',
+            'jurusan' => 'nullable|string',
+            'pekerjaan' => 'nullable|in:Belum Bekerja,Pegawai Negeri Sipil (PNS),Karyawan Swasta,Karyawan BUMN,TNI/POLRI,Wiraswasta,Pensiunan,Ibu Rumah Tangga',
+            'tempat_kerja' => 'nullable|string',
+            'pengalaman_organisasi' => 'nullable|string',
+            'pengalaman_gerejawi' => 'nullable|string',
+            'penguasaan_bahasa_daerah' => 'nullable|string',
+            'penguasaan_bahasa_asing' => 'nullable|string',
+            'telp' => 'nullable|string',
+            'hp' => 'nullable|string',
+            'email' => 'nullable|email',
+            'posisi_jabatan' => 'nullable|string',
+            'pengurus_pelkat' => 'nullable|in:PA,PT,GP,PKB,PKP,PKLU',
+            'profesi' => 'nullable|string',
+            'riwayat_lain' => 'nullable|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            // Hapus foto lama jika ada
+            if ($member->photo && \Storage::disk('public')->exists($member->photo)) {
+                \Storage::disk('public')->delete($member->photo);
+            }
+            // Upload foto baru
+            $validated['photo'] = $request->file('photo')->store('photos', 'public');
+        }
+
+        $member->update($validated);
+
+        return redirect()->route('members.index')->with('success', 'Anggota berhasil diperbarui!');
     }
 
     /**

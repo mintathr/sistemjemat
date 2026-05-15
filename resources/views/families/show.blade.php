@@ -54,8 +54,8 @@
                                         {{ $member->kategori }}
                                     </span>
                                 </td>
-                                <td class="px-4 py-3">{{ $member->tanggal_lahir->format('d M Y') }}</td>
-                                <td class="px-4 py-3 text-center">{{ $member->tanggal_lahir->age }} th</td>
+                                <td class="px-4 py-3">{{ $member->tanggal_lahir ? $member->tanggal_lahir->format('d M Y') : '-' }}</td>
+                                <td class="px-4 py-3 text-center">{{ $member->tanggal_lahir ? $member->tanggal_lahir->age . ' th' : '-' }}</td>
                                 <td class="px-4 py-3 text-center">
                                     <span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase 
                                         {{-- Logic Warna --}}

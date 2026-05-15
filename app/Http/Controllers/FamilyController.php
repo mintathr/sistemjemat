@@ -58,7 +58,8 @@ class FamilyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $family = Family::findOrFail($id);
+        return view('families.edit', compact('family'));
     }
 
     /**
@@ -66,7 +67,22 @@ class FamilyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'sektor' => 'required|in:1,2',
+            'alamat' => 'nullable|string',
+            'rt' => 'nullable|string',
+            'rw' => 'nullable|string',
+            'kodepos' => 'nullable|string',
+            'telp_rumah' => 'nullable|string',
+            'status_keluarga' => 'required|in:Aktif,Tidak Aktif',
+            'kode_amplop' => 'nullable|string',
+            'catatan_khusus' => 'nullable|string',
+        ]);
+
+        $family = Family::findOrFail($id);
+        $family->update($validated);
+
+        return redirect()->route('families.index')->with('success', 'Keluarga berhasil diperbarui!');
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Province;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -48,6 +49,7 @@ class Member extends Model
         'pengurus_pelkat',
         'profesi',
         'riwayat_lain',
+        'photo',
         'kompetensi_skill',
         'status_pindah_meninggal',
         'tanggal_pindah_meninggal',
@@ -123,5 +125,10 @@ class Member extends Model
     public function family()
     {
         return $this->belongsTo(Family::class);
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'tempat_lahir', 'code');
     }
 }

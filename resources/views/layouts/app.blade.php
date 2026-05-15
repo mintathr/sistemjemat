@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         /* Custom DataTables Styling agar senada dengan Tailwind */
         .dataTables_wrapper .dataTables_length select { padding-right: 2.5rem !important; border-radius: 0.375rem; border-color: #d1d5db; }
@@ -47,7 +48,7 @@
     </a>
 
     <a href="{{ route('members.index') }}" 
-       class="flex items-center px-6 py-3 transition duration-200 hover:bg-slate-700 {{ request()->routeIs('members.index') ? 'bg-slate-700 border-l-4 border-blue-500 text-white' : 'text-slate-400' }}">
+       class="flex items-center px-6 py-3 transition duration-200 hover:bg-slate-700 {{ request()->routeIs('members.index', 'members.show', 'members.edit') ? 'bg-slate-700 border-l-4 border-blue-500 text-white' : 'text-slate-400' }}">
         <i class="bi bi-person-vcard-fill text-lg"></i>
         <span x-show="sidebarOpen" class="ml-4 text-sm font-medium">Data Jemaat</span>
     </a>
